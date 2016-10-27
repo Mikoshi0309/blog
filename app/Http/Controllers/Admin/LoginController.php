@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\CodeController;
+use App\Http\Model\User;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Input;
+
+//require_once 'resources/org/code/Code.class.php';
+
+class LoginController extends CommonController
+{
+    public function login(){
+        if($input = Input::all()) {
+            $code = new CodeController();
+            $_code = $code->get();
+
+            $user = User::first();
+            if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass) != $input['user_pass']){
+                return back()->with('msg','用户名或密码错误');
+            }
+            if(strtoupper($input['code']) != $_code){
+                return back()->with('msg','验证码错误');
+                //return back()->withInput();
+            }
+            session(['user'=>$user]);
+            //dd(session('user'));
+            return redirect()->route('website');//return redirect()->route('website');
+
+        }else{
+
+            return view("admin.login");
+        }
+    }
+    public function code(){
+        $code = new CodeController();
+        $code->make();
+    }
+    public function crypt(){
+        $str = '123456';
+        echo Crypt::encrypt($str);
+    }
+    public function loginout(){
+        session(['user'=>null]);
+        return redirect()->route('website');
+    }
+}
