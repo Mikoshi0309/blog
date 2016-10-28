@@ -38,7 +38,11 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">
+                    @foreach($test as $k=>$t)
+                        <p>{{ $k }}=>{{  $t }}</p>
+                        @endforeach
+                </div>
             </div>
         </div>
     </body>
