@@ -19,6 +19,8 @@ Route::get('/a/{art_id}', 'Home\IndexController@article');
 
 Route::any('admin/login', 'Admin\LoginController@login');
 Route::get('admin/code', 'Admin\LoginController@code');
+Route::get('test', 'SwjTestController@test');
+Route::get('extest', 'SwjTestController@extest');
 //Route::get('admin/crypt', 'Admin\LoginController@crypt');
 
 
