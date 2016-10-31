@@ -23,9 +23,13 @@ Route::get('test', 'SwjTestController@test');
 Route::get('extest', 'SwjTestController@extest');
 //Route::get('admin/crypt', 'Admin\LoginController@crypt');
 
+/*********************************手动编写登录**************************/
+Route::post('authenticate', 'Auth\AuthController@authenticate');
+Route::get('testlogin', 'Auth\AuthController@testlogin');
+Route::get('testlogout', 'Auth\AuthController@testlogout');
 
 
-Route::group(['middleware'=>['admin.login'],'prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/',['as'=>'website','uses'=> 'IndexController@index']);
     Route::get('info', 'IndexController@info');
     Route::get('loginout', 'LoginController@loginout');
@@ -43,3 +47,6 @@ Route::group(['middleware'=>['admin.login'],'prefix'=>'admin','namespace'=>'Admi
     Route::post('config/changecontent', 'ConfigController@changecontent');
 
 });
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
