@@ -23,7 +23,7 @@ class AuthController extends Controller
     |
     */
 
-    //use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers;//, ThrottlesLogins;
 
     /**
      * Where to redirect users after login / registration.
@@ -76,26 +76,27 @@ class AuthController extends Controller
     }
 //测试手动登录
     public function testlogin(){
-        if(Auth::viaRemember()){
-            dd(123);
-        }else{
-            dd(234);
-        }
+//        if(Auth::check()){
+//
+//        }
+//        if(Auth::viaRemember()){
+//            dd(123);
+//        }else{
+//            dd(234);
+//        }
         return view('auth.login');
     }
 //测试登录执行
     public function authenticate( Request $request){
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
-              if(Auth::viaRemember()){
-                  dd(123);
-              }else{
-                  dd(234);
-              }
-            //return redirect('admin/');
+
+            return redirect()->intended('dashboard');
         }else{
             dd(123);
         }
     }
+
+
     public function testlogout(){
         Auth::logout();
     }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class SwjTestController extends Controller
 {
@@ -32,6 +34,18 @@ class SwjTestController extends Controller
 
         return view('welcome')->withTest($data);
 
+    }
+
+    public function sendMail(){
+        $data = ['email'=>'371608656@qq.com', 'name'=>'徐文志'];//,'img'=>'C:\wamp\www\code\uploads\20161024111437390.jpg'
+        Mail::send('activemail', $data, function($message) use($data)
+        {
+            $message->to('371608656@qq.com', '徐文志')->cc('1071499285@qq.com','asadsa')->subject('欢迎注册我们的网站，请激活您的账号！');
+        });
+//        Mail::raw('text to email',function($mess){
+//            $mess->to('371608656@qq.com', '徐文志')->cc('1071499285@qq.com','asadsa')->subject('欢迎注册我们的网站，请激活您的账号！');
+//            $mess->attach('C:\wamp\www\code\uploads\20161024111437390.jpg', ['as' => 'swj.jpg', 'mime' => 'image/jpeg']);
+//        });
     }
 
 }

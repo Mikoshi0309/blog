@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,19 @@ Route::get('/', 'Home\IndexController@index');
 Route::get('/cate/{cate_id}', 'Home\IndexController@cate');
 Route::get('/art', 'Home\IndexController@article');
 Route::get('/a/{art_id}', 'Home\IndexController@article');
+Route::get('/sendMail', 'SwjTestController@sendMail');
+Route::get('/password/reset/test',function (){
+    return view('auth.passwords.reset');
+});
+
+Route::get('checklogin', function(){
+    dd(Auth::viaRemember());
+    if (Auth::viaRemember()) {
+        return 'yes';
+    } else {
+        return 'no';
+    }
+});
 
 
 Route::any('admin/login', 'Admin\LoginController@login');
