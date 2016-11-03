@@ -7,6 +7,7 @@ use App\Http\Model\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends CommonController
@@ -82,10 +83,24 @@ class ArticleController extends CommonController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
+
         $data = (new Category())->tree();
         $file = Article::find($id);
+        /*if(Gate::denies('update-post',$file)){
+            return back()->with('errors',"你没有权限");
+        }*/
+        /*if($request->user()->cannot('update-post',$file)){
+            return back()->with('errors',"你没有权限");
+        }*/
+
+       /*if(Gate::denies('update',$file)){
+            return back()->with('errors',"你没有权限");
+        }*/
+
+        $this->authorize('update',$file);
+
         return view('admin/article/edit',compact('data','file'));
     }
 

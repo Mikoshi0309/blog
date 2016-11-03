@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Redis;
 
 class SwjTestController extends Controller
 {
@@ -48,4 +49,13 @@ class SwjTestController extends Controller
 //        });
     }
 
+
+    public function testredis(){
+        //$redis = Redis::connection();
+       // dd($redis);
+        $data = 'adsadadsasdasda';
+        Redis::set('name',$data);
+        $val = Redis::lrange('names',5,10);
+    }
+    
 }

@@ -21,6 +21,10 @@ Route::get('/password/reset/test',function (){
     return view('auth.passwords.reset');
 });
 
+
+Route::get('/testredis', 'SwjTestController@testredis');
+
+
 Route::get('checklogin', function(){
     dd(Auth::viaRemember());
     if (Auth::viaRemember()) {

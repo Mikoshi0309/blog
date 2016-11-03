@@ -12,6 +12,17 @@
         <div class="result_wrap">
             <div class="result_title">
                 <h3>快捷操作</h3>
+                @if(count($errors)>0)
+                    <div class="mark">
+                        @if(is_object($errors))
+                            @foreach($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        @else
+                            <p>{{ $errors }}</p>
+                        @endif
+                    </div>
+                @endif
             </div>
             <!--快捷导航 开始-->
             <div class="result_content">
@@ -44,6 +55,9 @@
                         <td>{{ $v->art_editor }}</td>
                         <td>{{ date('Y-m-d',$v->art_time) }}</td>
                         <td>
+                            {{--@can('update-post',$v)--}}
+                            {{--<a href="{{ url('admin/article/'.$v->art_id.'/edit') }}">修改</a>--}}
+                            {{--@endcan--}}
                             <a href="{{ url('admin/article/'.$v->art_id.'/edit') }}">修改</a>
                             <a href="javascript:;" onclick="delart({{ $v->art_id }})">删除</a>
                         </td>
