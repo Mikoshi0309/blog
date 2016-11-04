@@ -150,7 +150,8 @@ class CategoryController extends CommonController
         $re = Category::where('cate_id',$id)->delete();
         Category::where('cate_pid',$id)->update(['cate_pid'=>0]);
         if($re){
-
+            $data = Category::where('cate_pid',0)->get();
+            Redis::set('category_list',$data);
             $data = [
                 'status' => 0,
                 'msg' => '删除成功'

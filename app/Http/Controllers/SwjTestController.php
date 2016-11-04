@@ -54,8 +54,9 @@ class SwjTestController extends Controller
         //$redis = Redis::connection();
        // dd($redis);
         $data = 'adsadadsasdasda';
-        Redis::set('name',$data);
-        $val = Redis::lrange('names',5,10);
+       // Redis::set('name',$data);
+        //$val = Redis::lrange('names',5,10);
+        Redis::del('name');
     }
     
 }
