@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends CommonController
@@ -31,7 +32,15 @@ class CategoryController extends CommonController
      */
     public function create()
     {
-       $data = Category::where('cate_pid',0)->get();
+
+
+        $data = Redis::get('category_list');
+
+        $data = collect(json_decode($data));
+        if(!$data){
+            $data = Category::where('cate_pid',0)->get();
+        }
+        //dd(json_decode($data,true));
         return view("admin.category.add",compact('data'));
     }
 
@@ -54,6 +63,8 @@ class CategoryController extends CommonController
         if($var->passes()){
             $re = Category::create($input);
             if($re){
+                $data = Category::where('cate_pid',0)->get();
+                Redis::set('category_list',$data);
                 return redirect('admin/category');
             }else{
                 return back()->with('errors','添加错误');
@@ -85,7 +96,12 @@ class CategoryController extends CommonController
     public function edit($id)
     {
         $file = Category::find($id);
-        $data = Category::where('cate_pid',0)->get();
+        $data = Redis::get('category_list');
+        $data = json_decode($data);
+        if(!$data){
+            $data = Category::where('cate_pid',0)->get();
+        }
+
         return view('admin.category.edit',compact('file','data'));
     }
 
@@ -109,6 +125,8 @@ class CategoryController extends CommonController
         if($vali->passes()){
             $val = Category::where('cate_id',$id)->update($data);
             if($val){
+                $data = Category::where('cate_pid',0)->get();
+                Redis::set('category_list',$data);
                 return redirect('admin/category');
             }else{
                 return back()->with("errors","更新信息失败");
@@ -132,6 +150,7 @@ class CategoryController extends CommonController
         $re = Category::where('cate_id',$id)->delete();
         Category::where('cate_pid',$id)->update(['cate_pid'=>0]);
         if($re){
+
             $data = [
                 'status' => 0,
                 'msg' => '删除成功'

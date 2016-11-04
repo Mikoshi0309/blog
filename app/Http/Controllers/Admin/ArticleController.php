@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends CommonController
@@ -30,7 +31,10 @@ class ArticleController extends CommonController
      */
     public function create()
     {
-        $data = (new Category())->tree();
+
+            $data = (new Category())->tree();
+
+
         return view('admin.article.add',compact('data'));
     }
 
@@ -56,6 +60,8 @@ class ArticleController extends CommonController
         if($vali->passes()){
             $re = Article::create($data);
             if($re){
+                
+                Redis:set('article_list',$data);
                 return redirect('admin/article');
             }else{
                 return back()->with('errors','文章添加失败');
@@ -88,9 +94,9 @@ class ArticleController extends CommonController
 
         $data = (new Category())->tree();
         $file = Article::find($id);
-        /*if(Gate::denies('update-post',$file)){
+        if(Gate::denies('update-post',$file)){
             return back()->with('errors',"你没有权限");
-        }*/
+        }
         /*if($request->user()->cannot('update-post',$file)){
             return back()->with('errors',"你没有权限");
         }*/
@@ -98,8 +104,9 @@ class ArticleController extends CommonController
        /*if(Gate::denies('update',$file)){
             return back()->with('errors',"你没有权限");
         }*/
+        
+        //$this->authorize('update',$file);
 
-        $this->authorize('update',$file);
 
         return view('admin/article/edit',compact('data','file'));
     }

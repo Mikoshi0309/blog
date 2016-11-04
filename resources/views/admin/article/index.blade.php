@@ -55,10 +55,10 @@
                         <td>{{ $v->art_editor }}</td>
                         <td>{{ date('Y-m-d',$v->art_time) }}</td>
                         <td>
-                            {{--@can('update-post',$v)--}}
-                            {{--<a href="{{ url('admin/article/'.$v->art_id.'/edit') }}">修改</a>--}}
-                            {{--@endcan--}}
+                            @can('update-post',$v)
                             <a href="{{ url('admin/article/'.$v->art_id.'/edit') }}">修改</a>
+                            @endcan
+                            {{--<a href="{{ url('admin/article/'.$v->art_id.'/edit') }}">修改</a>--}}
                             <a href="javascript:;" onclick="delart({{ $v->art_id }})">删除</a>
                         </td>
                     </tr>

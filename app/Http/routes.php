@@ -25,14 +25,14 @@ Route::get('/password/reset/test',function (){
 Route::get('/testredis', 'SwjTestController@testredis');
 
 
-Route::get('checklogin', function(){
-    dd(Auth::viaRemember());
-    if (Auth::viaRemember()) {
-        return 'yes';
-    } else {
-        return 'no';
-    }
-});
+//Route::get('checklogin', function(){
+//    dd(Auth::viaRemember());
+//    if (Auth::viaRemember()) {
+//        return 'yes';
+//    } else {
+//        return 'no';
+//    }
+//});
 
 
 Route::any('admin/login', 'Admin\LoginController@login');
@@ -47,7 +47,7 @@ Route::get('testlogin', 'Auth\AuthController@testlogin');
 Route::get('testlogout', 'Auth\AuthController@testlogout');
 
 
-Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>['admin.login'],'prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/',['as'=>'website','uses'=> 'IndexController@index']);
     Route::get('info', 'IndexController@info');
     Route::get('loginout', 'LoginController@loginout');
@@ -65,6 +65,6 @@ Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],fun
     Route::post('config/changecontent', 'ConfigController@changecontent');
 
 });
-Route::auth();
+//Route::auth();
 
 Route::get('/home', 'HomeController@index');
