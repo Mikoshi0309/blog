@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Article;
 use App\SwjTest;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,10 @@ class SwjTestController extends Controller
        // Redis::set('name',$data);
         //$val = Redis::lrange('names',5,10);
         Redis::del('name');
+    }
+    
+    public function testarticle(Article $article){
+        $article->delete();
     }
     
 }

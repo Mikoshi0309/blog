@@ -23,7 +23,7 @@ Route::get('/password/reset/test',function (){
 
 
 Route::get('/testredis', 'SwjTestController@testredis');
-
+Route::get('/testroute/{article}', 'SwjTestController@testarticle');
 
 //Route::get('checklogin', function(){
 //    dd(Auth::viaRemember());
@@ -47,7 +47,7 @@ Route::get('testlogin', 'Auth\AuthController@testlogin');
 Route::get('testlogout', 'Auth\AuthController@testlogout');
 
 
-Route::group(['middleware'=>['admin.login'],'prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/',['as'=>'website','uses'=> 'IndexController@index']);
     Route::get('info', 'IndexController@info');
     Route::get('loginout', 'LoginController@loginout');
