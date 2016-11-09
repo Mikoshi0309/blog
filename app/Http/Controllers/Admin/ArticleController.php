@@ -59,6 +59,7 @@ class ArticleController extends CommonController
         $vali = Validator::make($data,$rules,$mess);
         if($vali->passes()){
             $re = Article::create($data);
+
             if($re){
                 
                 Redis:set('article_list',$data);

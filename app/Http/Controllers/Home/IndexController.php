@@ -27,7 +27,9 @@ class IndexController extends CommonController
         if(!Category::find($cate_id)){
             abort(404);
         }
-        $data = Article::where('cate_id',$cate_id)->orderBy('art_time','desc')->paginate(4);
+        //$data = Article::where('cate_id',$cate_id)->orderBy('art_time','desc')->paginate(4);
+        //一对多关联关系
+        $data = Category::find($cate_id)->articles()->orderBy('art_time','desc')->paginate(4);
         //查看次数自增
         Category::where('cate_id',$cate_id)->increment('cate_view');
 
@@ -41,6 +43,10 @@ class IndexController extends CommonController
             abort(404);
         }
         $data = Article::Join('category','article.cate_id','=','category.cate_id')->where('art_id',$art_id)->first();
+        //一对多——相对的关联
+        //$test = Article::find($art_id)->category;
+
+
         //查看次数自增
         //Article::where('art_id',$art_id)->increment('art_view');
         //监听器自增

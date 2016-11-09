@@ -34,6 +34,6 @@ class Category extends Model
     }
 
     public function articles(){
-        
+        return $this->hasMany('App\Http\Model\Article','cate_id');
     }
 }
