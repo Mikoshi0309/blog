@@ -21,9 +21,14 @@ Route::get('/password/reset/test',function (){
     return view('auth.passwords.reset');
 });
 
-
+/*****************Test********************/
 Route::get('/testredis', 'SwjTestController@testredis');
+//路由绑定模型测试
 Route::get('/testroute/{article}', 'SwjTestController@testarticle');
+
+Route::get('test', 'SwjTestController@test');
+Route::get('extest', 'SwjTestController@extest');
+Route::get('testexcel', 'SwjTestController@testexcel');
 
 //Route::get('checklogin', function(){
 //    dd(Auth::viaRemember());
@@ -33,20 +38,19 @@ Route::get('/testroute/{article}', 'SwjTestController@testarticle');
 //        return 'no';
 //    }
 //});
-
-
-Route::any('admin/login', 'Admin\LoginController@login');
-Route::get('admin/code', 'Admin\LoginController@code');
-Route::get('test', 'SwjTestController@test');
-Route::get('extest', 'SwjTestController@extest');
-//Route::get('admin/crypt', 'Admin\LoginController@crypt');
-
 /*********************************手动编写登录**************************/
 Route::post('authenticate', 'Auth\AuthController@authenticate');
 Route::get('testlogin', 'Auth\AuthController@testlogin');
 Route::get('testlogout', 'Auth\AuthController@testlogout');
 
 
+
+//Route::get('admin/crypt', 'Admin\LoginController@crypt');
+
+
+
+Route::any('admin/login', 'Admin\LoginController@login');
+Route::get('admin/code', 'Admin\LoginController@code');
 Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/',['as'=>'website','uses'=> 'IndexController@index']);
     Route::get('info', 'IndexController@info');

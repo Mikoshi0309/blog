@@ -32,4 +32,8 @@ class Category extends Model
         
         return $arr;
     }
+
+    public function articles(){
+        
+    }
 }

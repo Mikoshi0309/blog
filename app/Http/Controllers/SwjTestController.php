@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\Redis;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SwjTestController extends Controller
 {
@@ -59,9 +60,20 @@ class SwjTestController extends Controller
         //$val = Redis::lrange('names',5,10);
         Redis::del('name');
     }
-    
+    //路由绑定模型测试
     public function testarticle(Article $article){
         $article->delete();
     }
-    
+    //excel导出
+    public function testexcel(){
+
+        $data = Article::all();
+
+        Excel::create('测试',function($excel) use($data){
+            //$excel->setTitle('swj-test');
+            $excel->sheet('first sheet',function($sheet) use($data){
+               $sheet->fromArray($data,null,'A1',true);
+            });
+        })->export('xls');
+    }
 }
