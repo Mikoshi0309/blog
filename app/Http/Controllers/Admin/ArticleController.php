@@ -95,9 +95,9 @@ class ArticleController extends CommonController
 
         $data = (new Category())->tree();
         $file = Article::find($id);
-        if(Gate::denies('update-post',$file)){
-            return back()->with('errors',"你没有权限");
-        }
+//        if(Gate::denies('update-post',$file)){
+//            return back()->with('errors',"你没有权限");
+//        }
         /*if($request->user()->cannot('update-post',$file)){
             return back()->with('errors',"你没有权限");
         }*/
