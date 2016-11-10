@@ -61,8 +61,9 @@ class SwjTestController extends Controller
         Redis::del('name');
     }
     //路由绑定模型测试
-    public function testarticle(Article $article){
-        $article->delete();
+    //$name需与路由参数name一致
+    public function testarticle(Article $name){
+        $name->delete();
     }
     //excel导出
     public function testexcel(){

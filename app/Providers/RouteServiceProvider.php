@@ -29,8 +29,8 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot($router);
 
-        $router->bind('testroute/article',function ($name){
-            return Article::where('art_id',$name)->get();
+        $router->bind('testroute',function ($title){
+            return Article::where('art_id',$title)->get();
         });
     }
 

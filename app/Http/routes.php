@@ -24,7 +24,7 @@ Route::get('/password/reset/test',function (){
 /*****************Test********************/
 Route::get('/testredis', 'SwjTestController@testredis');
 //路由绑定模型测试
-Route::get('/testroute/{article}', 'SwjTestController@testarticle');
+Route::get('/testroute/{name}', 'SwjTestController@testarticle');
 
 Route::get('test', 'SwjTestController@test');
 Route::get('extest', 'SwjTestController@extest');
