@@ -78,6 +78,18 @@ return [
             'schema' => 'public',
         ],
 
+        'mongodb'=>[
+            'driver' => 'mongodb',
+            'host' => env('MO_DB_HOST', '127.0.0.1'),
+            'port' => env('MO_DB_PORT', 27017),
+            'database' => env('MO_DB_DATABASE', 'admin'),
+            'username' => env('MO_DB_USERNAME', 'root'),
+            'password' => env('MO_DB_PASSWORD', '123456'),
+            'options' => array(
+                'db' => 'admin' // sets the authentication database required by mongo 3
+            )
+        ],
+
     ],
 
     /*

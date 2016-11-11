@@ -134,6 +134,8 @@ class ArticleController extends CommonController
         if($vali->passes()){
             $re = Article::where('art_id',$id)->update($data);
             if($re){
+                $new_data = Article::all();
+                Redis:set('article_list',$new_data);
                 return redirect('admin/article');
             }else{
                 return back()->with('errors','更新成功');
@@ -154,6 +156,8 @@ class ArticleController extends CommonController
     {
         $re = Article::where('art_id',$id)->delete();
         if($re){
+            $new_data = Article::all();
+            Redis:set('article_list',$new_data);
             $data = [
                 'status'=>0,
                 'msg'=>'删除成功',
