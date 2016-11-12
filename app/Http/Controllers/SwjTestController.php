@@ -77,4 +77,13 @@ class SwjTestController extends Controller
             });
         })->export('xls');
     }
+
+    public function testsetcache(){
+        //Cache::put('bar', 'adsadsa',1000);
+        Cache::store('redis')->put('bar', 'adsadsa',1000);
+    }
+    public function testgetcache(){
+        echo Cache::get('bar');
+        //echo Cache::store('redis')->get('bar');
+    }
 }
