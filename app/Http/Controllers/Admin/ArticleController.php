@@ -7,6 +7,7 @@ use App\Http\Model\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +49,7 @@ class ArticleController extends CommonController
     {
         $data = $request->except('_token');
         $data['art_time'] = time();
+        $data['user_id'] = Auth::user()->user_id;
         $rules = [
             'art_title' => 'required',
             'art_content' => 'required',
@@ -59,10 +61,9 @@ class ArticleController extends CommonController
         $vali = Validator::make($data,$rules,$mess);
         if($vali->passes()){
             $re = Article::create($data);
-
             if($re){
-                
-                Redis:set('article_list',$data);
+                Redis::zadd($re->cate_id,$re->art_id,$re->art_id);
+                Redis::zadd('article_all',$re->art_id,$re->art_id);
                 return redirect('admin/article');
             }else{
                 return back()->with('errors','文章添加失败');
@@ -154,10 +155,11 @@ class ArticleController extends CommonController
      */
     public function destroy($id)
     {
-        $re = Article::where('art_id',$id)->delete();
+        $data = Article::find($id);
+        $re = $data->delete();
         if($re){
-            $new_data = Article::all();
-            Redis:set('article_list',$new_data);
+            Redis::zremrangebyscore($data->cate_id,$id,$id);
+            Redis::zremrangebyscore('article_id',$id,$id);
             $data = [
                 'status'=>0,
                 'msg'=>'删除成功',

@@ -11,14 +11,34 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends CommonController
 {
-    public function index(){
+    public function index(Request $request){
 
         $pics = Article::orderBy('art_view','desc')->take(6)->get();
 
-        $data = Article::orderBy('art_time','desc')->paginate(5);
+        //redis分页获取数据
+//          $page = $request->page ? $request->page : 1;
+ //         $pagesize = 3;
+//        $offset=$pagesize*($page - 1);
+//        $ids = Redis::zrange('article_all',$offset,$pagesize*$page-1);
+//        $collect = collect($ids);
+//        $data = $collect->map(function($item,$key){
+//            return Article::find($item);
+//        });
+        //缓存分页对象
+        //$data = unserialize(Redis::get('oarticle_all'));
+        //if(!$data){
+            //对象存储前序列化
+            $data = Article::orderBy('art_time','desc')->paginate(4);
+            //$sdata = serialize($data);
+           // Redis::set('oarticle_all',$sdata);
+            // $data = Article::orderBy('art_time','desc')->paginate(3);
+        //}
+
+
         $links = Link::orderBy('link_order','asc')->get();
         return view('home.index',compact('pics','hot','data','new','links'));
     }

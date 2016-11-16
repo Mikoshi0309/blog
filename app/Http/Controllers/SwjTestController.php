@@ -53,12 +53,20 @@ class SwjTestController extends Controller
 
 
     public function testredis(){
-        //$redis = Redis::connection();
+        $redis = Redis::connection();
        // dd($redis);
         $data = 'adsadadsasdasda';
-       // Redis::set('name',$data);
-        //$val = Redis::lrange('names',5,10);
-        Redis::del('name');
+      // Redis::set('laravelname',$data);
+        //echo $redis->get('swj');
+        if($redis->type('test2') == 'list'){
+            $val = $redis->lrange('test2',0,1);
+            dd($val);
+        }else{
+            dd(123);
+        }
+
+        //Redis::del('name');
+
     }
     //路由绑定模型测试
     //$name需与路由参数name一致
@@ -80,10 +88,12 @@ class SwjTestController extends Controller
 
     public function testsetcache(){
         //Cache::put('bar', 'adsadsa',1000);
-        Cache::store('redis')->put('bar', 'adsadsa',1000);
+        $data = Article::orderBy('art_time','desc')->get();
+        Redis::set('article_all',$data);
+        //Cache::store('redis')->put('bar', 'adsadsa',1000);
     }
-    public function testgetcache(){
-        echo Cache::get('bar');
+    public function testgetcache($page=1){
+        //echo Cache::get('bar');
         //echo Cache::store('redis')->get('bar');
     }
 }

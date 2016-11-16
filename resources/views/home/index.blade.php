@@ -44,6 +44,7 @@
             <div class="page">
                 {{ $data->links() }}
             </div>
+
     </div>
     <!-- Baidu Button BEGIN -->
     <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare"><a class="bds_tsina"></a><a class="bds_qzone"></a><a class="bds_tqq"></a><a class="bds_renren"></a><span class="bds_more"></span><a class="shareCount"></a></div>
@@ -61,9 +62,9 @@
                 <p>友情<span>链接</span></p>
             </h3>
             <ul class="website">
-                @foreach($links as $l)
-                <li><a href="{{ url($l->link_url) }}">{{ $l->link_name }}</a></li>
-                @endforeach
+                    @foreach($links as $l)
+                        <li><a href="{{ url($l->link_url) }}">{{ $l->link_name }}</a></li>
+                    @endforeach
             </ul>
         </div>
 
