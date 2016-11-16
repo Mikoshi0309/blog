@@ -11,6 +11,7 @@
     <!--[if lt IE 9]>
     <script src="{{ asset('resources/views/home/js/modernizr.js') }}"></script>
     <![endif]-->
+    <meta property="wb:webmaster" content="8a8209276cba4ad6" />
 </head>
 <body>
 <header>

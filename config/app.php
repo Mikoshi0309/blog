@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
 
         /*
@@ -208,6 +209,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel'=> Maatwebsite\Excel\Facades\Excel::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

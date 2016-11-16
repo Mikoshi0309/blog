@@ -100,4 +100,20 @@ class AuthController extends Controller
     public function testlogout(){
         Auth::logout();
     }
+
+    public function weibo() {
+        return \Socialite::with('weibo')->redirect();
+        // return \Socialite::with('weibo')->scopes(array('email'))->redirect();
+    }
+
+
+    public function callback() {
+        $oauthUser = \Socialite::with('weibo')->user();
+
+        var_dump($oauthUser->getId());
+        var_dump($oauthUser->getNickname());
+        var_dump($oauthUser->getName());
+        var_dump($oauthUser->getEmail());
+        var_dump($oauthUser->getAvatar());
+    }
 }
