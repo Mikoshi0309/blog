@@ -14,6 +14,7 @@
             @if(count($errors)>0)
                 <div class="mark">
                     @if(is_object($errors))
+                        {{--{!! $errors->first('test') !!}--}}
                         @foreach($errors->all() as $error)
                             <p>{{ $error }}</p>
                         @endforeach

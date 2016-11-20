@@ -31,8 +31,9 @@ class IndexController extends CommonController
         //缓存分页对象
         //$data = unserialize(Redis::get('oarticle_all'));
         //if(!$data){
-            //对象存储前序列化
+
             $data = Article::orderBy('art_time','desc')->paginate(4);
+            //对象存储前序列化
             //$sdata = serialize($data);
            // Redis::set('oarticle_all',$sdata);
             // $data = Article::orderBy('art_time','desc')->paginate(3);
