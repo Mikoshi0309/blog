@@ -20,12 +20,12 @@ class HomeComposer
     }
 
     public function compose(View $view){
-        $navs = $this->navs->all();
+        $data['navs'] = $this->navs->all();
 
-        $new = $this->article->orderBy('art_time','desc')->take(8)->get();
-        $hot = $this->article->orderBy('art_view','desc')->take(5)->get();
-        $view->with('navs',$navs);
-        $view->with('new',$new);
-        $view->with('hot',$hot);
+        $data['new'] = $this->article->orderBy('art_time','desc')->take(8)->get();
+        $data['hot'] = $this->article->orderBy('art_view','desc')->take(5)->get();
+        $view->with($data);
+//        $view->with('new',$new);
+//        $view->with('hot',$hot);
     }
 }

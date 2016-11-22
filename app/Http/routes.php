@@ -32,6 +32,9 @@ Route::get('testexcel', 'SwjTestController@testexcel');
 Route::get('testsetcache', 'SwjTestController@testsetcache');
 Route::get('testgetcache/{page?}', 'SwjTestController@testgetcache');
 
+
+Route::get('testbb', 'SwjTestController@testbb');
+
 //Route::get('checklogin', function(){
 //    dd(Auth::viaRemember());
 //    if (Auth::viaRemember()) {

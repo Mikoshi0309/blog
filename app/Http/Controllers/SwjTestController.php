@@ -96,4 +96,10 @@ class SwjTestController extends Controller
         //echo Cache::get('bar');
         //echo Cache::store('redis')->get('bar');
     }
+    public function testbb(Request $request){
+        return function() use($request){
+            return $request->name;
+        };
+
+    }
 }

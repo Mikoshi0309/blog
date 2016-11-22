@@ -41,8 +41,8 @@
                         <th width="120">分类：</th>
                         <td>
                             <select name="cate_id">
-                                @foreach($data as $d)
-                                <option value="{{ $d->cate_id }}">{{ $d->cate_name }}</option>
+                                @foreach($data as $k=>$d)
+                                <option value="{{ $k }}">{{ $d }}</option>
                                 @endforeach
                             </select>
                         </td>

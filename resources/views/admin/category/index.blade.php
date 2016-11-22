@@ -104,13 +104,15 @@
             btn:['确定','取消']
         },function(){
             $.post('{{ url('admin/category/') }}/'+id,{'_method':'delete','_token':'{{ csrf_token() }}'},function(data){
+
                 if(!data.status){
+                    alert(data);
                     layer.msg(data.msg,{icon:6});
                     location.href = location.href;
                 }else{
                     layer.msg(data.msg,{icon:5});
                 }
-            });
+            },'json');
            // layer.msg('确定删除',{icon:1});
         },function(){
 //            layer.msg('',{

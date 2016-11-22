@@ -203,6 +203,7 @@ class CategoryController extends CommonController
             //dd($val->errors());
         //}
        // if($val->passes()){
+
            $cate = Category::find($input['cate_id']);
             $cate->cate_order = $input['cate_order'];
             $re = $cate->update();

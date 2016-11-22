@@ -33,8 +33,7 @@ class ArticleController extends CommonController
     public function create()
     {
 
-            $data = (new Category())->tree();
-
+            $data = Category::getCategoryTree();
 
         return view('admin.article.add',compact('data'));
     }
