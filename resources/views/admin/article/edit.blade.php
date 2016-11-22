@@ -42,12 +42,12 @@
                         <th width="120">分类：</th>
                         <td>
                             <select name="cate_id">
-                                @foreach($data as $d)
-                                <option value="{{ $d->cate_id }}"
-                                    @if($d->cate_id == $file->cate_id)
+                                @foreach($data as $k=>$d)
+                                <option value="{{ $k }}"
+                                    @if($k == $file->cate_id)
                                             selected
                                     @endif
-                                >{{ $d->cate_name }}</option>
+                                >{{ $d }}</option>
                                 @endforeach
                             </select>
                         </td>

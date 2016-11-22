@@ -93,7 +93,7 @@ class ArticleController extends CommonController
     public function edit(Request $request,$id)
     {
 
-        $data = (new Category())->tree();
+        $data = Category::getCategoryTree();
         $file = Article::find($id);
 //        if(Gate::denies('update-post',$file)){
 //            return back()->with('errors',"你没有权限");
