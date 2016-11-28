@@ -46,7 +46,7 @@ class ArticleController extends CommonController
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
+        $data = $request->except('_token','');
         $data['art_time'] = time();
         $data['user_id'] = Auth::user()->user_id;
         $rules = [

@@ -46,12 +46,12 @@
                         <td>
                             <select name="cate_pid">
                                 <option value="0">==顶级分类==</option>
-                                @foreach($data as $d)
-                                <option value="{{ $d->cate_id }}"
-                                    @if($d->cate_id == $file->cate_pid)
+                                @foreach($data as $k=>$d)
+                                <option value="{{ $k }}"
+                                    @if($k == $file->cate_pid)
                                         selected
                                         @endif
-                                >{{ $d->cate_name }}</option>
+                                >{{ $d }}</option>
                                 @endforeach
                             </select>
                         </td>

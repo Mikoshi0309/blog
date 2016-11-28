@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Validator;
 use Illuminate\Http\Request;
 use App\User;
-
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 
 class AuthController extends Controller
 {
@@ -69,7 +70,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'user_name' => $data['name'],
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

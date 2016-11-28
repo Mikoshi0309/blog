@@ -38,8 +38,9 @@ class CategoryController extends CommonController
 
         //$data = collect(json_decode($data));
         //if(!$data){
-            $data = Category::where('cate_pid',0)->get();
+            //$data = Category::where('cate_pid',0)->get();
         //}
+        $data = Category::getCategoryTree();
         //dd(json_decode($data,true));
         return view("admin.category.add",compact('data'));
     }
@@ -99,9 +100,9 @@ class CategoryController extends CommonController
         //$data = Redis::get('category_list');
         //$data = json_decode($data);
         //if(!$data){
-            $data = Category::where('cate_pid',0)->get();
+            //$data = Category::where('cate_pid',0)->get();
        // }
-
+        $data = Category::getCategoryTree();
         return view('admin.category.edit',compact('file','data'));
     }
 

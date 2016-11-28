@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+    {{--<link href="{{ asset('/resources/views/admin/style/tags/css/bootstrap-tokenfield.css') }}" type="text/css" rel="stylesheet">--}}
+    {{--<link href="{{ asset('/resources/views/admin/style/tags/css/jquery-ui.css ') }}" type="text/css" rel="stylesheet">--}}
+
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
@@ -42,7 +45,7 @@
                         <td>
                             <select name="cate_id">
                                 @foreach($data as $k=>$d)
-                                <option value="{{ $k }}">{{ $d }}</option>
+                                    <option value="{{ $k }}">{{ $d }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -102,10 +105,10 @@
 
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="form-group">
                         <th>关键词：</th>
-                        <td>
-                            <input type="text" class="lg" name="art_tag">
+                        <td class="col-sm-7">
+                            <input type="text"  name="art_tag" id="inputTags" class="form-control">
                         </td>
                     </tr>
                     <tr>
@@ -146,5 +149,28 @@
             </table>
         </form>
     </div>
+    {{--<script type="text/javascript" src="{{ asset('/resources/views/admin/style/tags/jquery-ui.js ') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/resources/views/admin/style/tags/bootstrap-tokenfield.js ') }}" charset="UTF-8"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/resources/views/admin/style/js/funs.js') }}" charset="UTF-8"></script>--}}
 
+    {{--<script type="text/javascript">--}}
+        {{--$('#inputTags').tokenfield({--}}
+            {{--autocomplete: {--}}
+                {{--source: [<?php echo  \App\Http\Model\Tag::getTagStringAll()?>],--}}
+                {{--delay: 100--}}
+            {{--},--}}
+            {{--showAutocompleteOnFocus: !0,--}}
+            {{--delimiter: [","]--}}
+        {{--})--}}
+
+        {{--$(function(){--}}
+            {{--//上传看得到图片--}}
+            {{--$("#file_upload").change(function(){--}}
+                {{--var objUrl = getObjectURL(this.files[0]);--}}
+                {{--if (objUrl) {--}}
+                    {{--$("#art_thumb_img").attr("src", objUrl).fadeIn();--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
 @endsection

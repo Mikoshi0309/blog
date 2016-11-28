@@ -21,4 +21,16 @@ class CommonController extends Controller
             return $filepath;
         }
     }
+    public static function uploadImg($field)
+    {
+        if (Request::hasFile($field)) {
+            $pic = Request::file($field);
+            if ($pic->isValid()) {
+                $newName = md5(rand(1, 1000) . $pic->getClientOriginalName()) . "." . $pic->getClientOriginalExtension();
+                $pic->move('uploads', $newName);
+                return $newName;
+            }
+        }
+        return '';
+    }
 }

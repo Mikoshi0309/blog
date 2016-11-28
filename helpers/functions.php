@@ -24,3 +24,18 @@ if(!function_exists('catetree')){
         return $list;
     }
 }
+
+if(!function_exists('converClassPath')){
+    function converClassPath($className){
+
+        if(!$className){
+            return false;
+        }
+        $className = str_replace('\\','-',$className);
+        if(preg_match('/.*-(.*)Controller/is',$className,$matches)){
+            Config::set('path.class',$matches[1]);
+        }else{
+            return response('conversionClassPathError', 500);
+        }
+    }
+}

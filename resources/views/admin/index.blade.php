@@ -11,7 +11,7 @@
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：{{Auth::user()->user_name}}</li>
+				<li>管理员：{{Auth::user()->name}}</li>
 				<li><a href="{{ url('admin/pass') }}" target="main">修改密码</a></li>
 				<li><a href="{{ url('/logout') }}">退出</a></li>
 			</ul>
@@ -29,6 +29,7 @@
 					<li><a href="{{ url('admin/category') }}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
 					<li><a href="{{ url('admin/article/create') }}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加文章</a></li>
 					<li><a href="{{ url('admin/article') }}" target="main"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
+					<li><a href="{{ url('admin/tag') }}" target="main"><i class="fa fa-fw fa-list-ul"></i>标签列表</a></li>
 				</ul>
 			</li>
 			<li>

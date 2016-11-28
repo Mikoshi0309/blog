@@ -72,9 +72,9 @@ Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin'],fun
     Route::resource('config','ConfigController');
     Route::post('config/changeorder', 'ConfigController@changeorder');
     Route::post('config/changecontent', 'ConfigController@changecontent');
-
+    Route::resource('tag','TagController');
 });
-//Route::auth();
+Route::auth();
 
 Route::get('/home', 'HomeController@index');
 // 引导用户到新浪微博的登录授权页面

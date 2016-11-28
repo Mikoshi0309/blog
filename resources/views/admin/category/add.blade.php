@@ -42,8 +42,8 @@
                         <td>
                             <select name="cate_pid">
                                 <option value="0">==顶级分类==</option>
-                                @foreach($data as $d)
-                                <option value="{{ $d->cate_id }}">{{ $d->cate_name }}</option>
+                                @foreach($data as $k=>$d)
+                                <option value="{{ $k }}">{{ $d }}</option>
                                 @endforeach
                             </select>
                         </td>
