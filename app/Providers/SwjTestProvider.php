@@ -24,7 +24,7 @@ class SwjTestProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('swjtest',function(){
+        $this->app->bind('SwjTest',function(){
            return new SwjTest;
         });
     }

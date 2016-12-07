@@ -212,7 +212,7 @@ return [
         'Excel'=> Maatwebsite\Excel\Facades\Excel::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'SwjTest' => App\Contract\Facades\SwjTest::class,
+       // 'SwjTest' => App\Contract\Facades\SwjTest::class,
     ],
 
 ];

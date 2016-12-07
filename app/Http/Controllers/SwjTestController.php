@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Contract\Facades\SwjTest;
+//use App\Contract\Facades\SwjTest;
+//use App\Contract\SwjTest;
 use App\Http\Model\Article;
 
 use Illuminate\Http\Request;
@@ -104,7 +105,8 @@ class SwjTestController extends Controller
 
     }
     public function testfacade(){
-        dd(SwjTest::Bar());
+        $test = app('SwjTest');
+        dd($test->Bar());
     }
     
     
