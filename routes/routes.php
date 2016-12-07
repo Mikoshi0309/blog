@@ -31,6 +31,7 @@ Route::get('extest', 'SwjTestController@extest');
 Route::get('testexcel', 'SwjTestController@testexcel');
 Route::get('testsetcache', 'SwjTestController@testsetcache');
 Route::get('testgetcache/{page?}', 'SwjTestController@testgetcache');
+Route::get('testfacade', 'SwjTestController@testfacade');
 
 
 Route::get('testbb', 'SwjTestController@testbb');

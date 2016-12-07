@@ -162,6 +162,7 @@ return [
         App\Providers\ConServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\PaginationProvider::class,
+        App\Providers\SwjTestProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
         'Excel'=> Maatwebsite\Excel\Facades\Excel::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'SwjTest' => App\Contract\Facades\SwjTest::class,
     ],
 
 ];

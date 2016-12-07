@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contract\Facades\SwjTest;
 use App\Http\Model\Article;
-use App\SwjTest;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -96,10 +97,16 @@ class SwjTestController extends Controller
         //echo Cache::get('bar');
         //echo Cache::store('redis')->get('bar');
     }
-    public function testbb(Request $request){
-        return function() use($request){
-            return $request->name;
+    public function testbb(){
+        return function(){
+            echo  '';
         };
 
     }
+    public function testfacade(){
+        dd(SwjTest::Bar());
+    }
+    
+    
+    
 }
