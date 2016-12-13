@@ -109,8 +109,17 @@
                     </tr>
                     <tr>
                         <th>关键词：</th>
-                        <td>
-                            <input type="text" class="lg" name="art_tag">
+                        <td class="col-sm-7">
+                            <select id="post-tags" name="tags[]" class="form-control" multiple>
+
+                                @foreach($tags as $tag)
+                                    @if(isset($file)&&$file->tags->contains($tag))
+                                    <option value="{{ $tag->name }}" selected>{{ $tag->name }}</option>
+                                        @else
+                                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -151,5 +160,10 @@
             </table>
         </form>
     </div>
-
+    <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $("#post-tags").select2({
+            tags: true
+        });
+    </script>
 @endsection

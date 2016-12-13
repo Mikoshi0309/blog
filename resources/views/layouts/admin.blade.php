@@ -2,11 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+
     <link rel="stylesheet" href="{{ asset('/resources/views/admin/style/css/ch-ui.admin.css') }}">
     <link rel="stylesheet" href="{{ asset('/resources/views/admin/style/font/css/font-awesome.min.css') }}">
     <script type="text/javascript" src="{{ asset('/resources/views/admin/style/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/resources/views/admin/style/js/ch-ui.admin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/resources/org/layer/layer.js') }}"></script>
+<style>
+    .select2-container {
+        box-sizing: border-box !important ;
+        margin: 0 !important;
+        position: relative;
+        display: inline !important;
+        vertical-align: middle !important;
+    }
+    table.add_tab tr td span{
+        margin-left: 0px !important;
+    }
+    table.add_tab tr {
+        line-height: 30px !important;
+    }
+    </style>
+    <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
 </head>
 <body>
 @yield('content')

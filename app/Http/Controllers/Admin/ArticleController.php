@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Article;
 use App\Http\Model\Category;
+use App\Http\Model\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -34,8 +35,8 @@ class ArticleController extends CommonController
     {
 
             $data = Category::getCategoryTree();
-
-        return view('admin.article.add',compact('data'));
+            $tags = Tag::all();
+        return view('admin.article.add',compact('data','tags'));
     }
 
     /**
@@ -46,9 +47,9 @@ class ArticleController extends CommonController
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token','');
+        $data = $request->except('_token');
         $data['art_time'] = time();
-        $data['user_id'] = Auth::user()->user_id;
+        //$data['user_id'] = Auth::user()->user_id;
         $rules = [
             'art_title' => 'required',
             'art_content' => 'required',
@@ -59,10 +60,19 @@ class ArticleController extends CommonController
         ];
         $vali = Validator::make($data,$rules,$mess);
         if($vali->passes()){
-            $re = Article::create($data);
+            if(!empty($data['tags'])){
+                $ids = [];
+                foreach ($data['tags'] as $tagname){
+                    $tag = Tag::firstOrCreate(['name'=>$tagname]);
+                    array_push($ids,$tag->id);
+                }
+            }
+
+            $re = Auth::user()->articles()->create($data);
             if($re){
-                Redis::zadd($re->cate_id,$re->art_id,$re->art_id);
-                Redis::zadd('article_all',$re->art_id,$re->art_id);
+                $re->tags()->sync($ids);
+                //Redis::zadd($re->cate_id,$re->art_id,$re->art_id);
+                //Redis::zadd('article_all',$re->art_id,$re->art_id);
                 return redirect('admin/article');
             }else{
                 return back()->with('errors','文章添加失败');
@@ -94,7 +104,7 @@ class ArticleController extends CommonController
     {
 
         $data = Category::getCategoryTree();
-        $file = Article::find($id);
+        $file = Article::with(['tags'])->find($id);
 //        if(Gate::denies('update-post',$file)){
 //            return back()->with('errors',"你没有权限");
 //        }
@@ -108,8 +118,8 @@ class ArticleController extends CommonController
         
         //$this->authorize('update',$file);
 
-
-        return view('admin/article/edit',compact('data','file'));
+        $tags = Tag::all();
+        return view('admin/article/edit',compact('data','file','tags'));
     }
 
     /**

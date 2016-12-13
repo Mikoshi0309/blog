@@ -9,6 +9,14 @@ class Tag extends Model
     static $tags;
     public $timestamps = false;
     protected $guarded = [];
+
+    public function articles(){
+        return $this->belongsToMany(Article::class);
+    }
+
+
+
+
     public static function getTagArr(){
         $data = self::getTagModeArr();
         if(!empty($data)){

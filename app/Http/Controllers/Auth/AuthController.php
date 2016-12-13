@@ -95,6 +95,14 @@ class AuthController extends Controller
         }else{
             dd(123);
         }
+        /**********************注册直接登录****************/
+//        $this->validate($request,[
+//            'name' => 'required|max:255',
+//            'email' => 'required|email|max:255|unique:user',
+//            'password' => 'required|min:6|confirmed',
+//        ]);
+//        auth()->login($this->create($request->all()));
+//        return redirect($this->redirectPath());
     }
 
 

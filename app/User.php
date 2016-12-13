@@ -33,4 +33,7 @@ class User extends Authenticatable
 
         return  $this->table;
     }
+    public function articles(){
+        return $this->hasMany('App\Http\Model\article','user_id');
+    }
 }

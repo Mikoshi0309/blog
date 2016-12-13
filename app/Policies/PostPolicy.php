@@ -23,6 +23,6 @@ class PostPolicy
     public function update(User $user,Article $article){
 
        // dd($article);
-        return $user->user_id === $article->user_id;
+        return $user->id === $article->user_id;
     }
 }

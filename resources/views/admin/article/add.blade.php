@@ -107,8 +107,13 @@
                     </tr>
                     <tr class="form-group">
                         <th>关键词：</th>
+
                         <td class="col-sm-7">
-                            <input type="text"  name="art_tag" id="inputTags" class="form-control">
+                            <select id="post-tags" name="tags[]" class="form-control" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -173,4 +178,10 @@
             {{--});--}}
         {{--});--}}
     {{--</script>--}}
+    <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $("#post-tags").select2({
+            tags: true
+        });
+    </script>
 @endsection
