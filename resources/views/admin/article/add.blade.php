@@ -53,13 +53,13 @@
                     <tr>
                         <th><i class="require">*</i>文章标题：</th>
                         <td>
-                            <input type="text" class="lg" name="art_title">
+                            <input type="text" class="lg" name="art_title" value="{{ old('art_title') }}">
                         </td>
                     </tr>
                     <tr>
                         <th>编辑：</th>
                         <td>
-                            <input type="text" class="sm" name="art_editor">
+                            <input type="text" class="sm" name="art_editor" value="{{ old('art_editor') }}">
 
                         </td>
                     </tr>
@@ -67,8 +67,8 @@
                         <th>缩略图：</th>
 
                         <td>
-                            <input type="text" size="50" name="art_thumb">
-                            <input id="file_upload" name="file_upload" type="file" multiple="true">
+                            <input type="text" size="50" name="art_thumb" value="{{ old('file_upload') }}">
+                          <input id="file_upload" name="file_upload" type="file" multiple="true" >
                             <script src="{{ asset('resources/org/uploadify/jquery.uploadify.min.js') }}" type="text/javascript"></script>
                             <link rel="stylesheet" type="text/css" href="{{ asset('resources/org/uploadify/uploadify.css') }}">
                             <script type="text/javascript">
@@ -119,7 +119,7 @@
                     <tr>
                         <th>描述：</th>
                         <td>
-                            <textarea name="art_description"></textarea>
+                            <textarea name="art_description">{{ old('art_description') }}</textarea>
                         </td>
                     </tr>
 
@@ -130,7 +130,7 @@
                             <script type="text/javascript" charset="utf-8" src="{{ asset('resources/org/ueditor/ueditor.config.js') }}"></script>
                             <script type="text/javascript" charset="utf-8" src="{{ asset('resources/org/ueditor/ueditor.all.min.js') }}"> </script>
                             <script type="text/javascript" charset="utf-8" src="{{ asset('resources/org/ueditor/lang/zh-cn/zh-cn.js') }}"></script>
-                            <script id="editor" name="art_content" type="text/plain" style="width:860px;height:500px;"></script>
+                            <script id="editor" name="art_content" type="text/plain" style="width:860px;height:500px;">{!!  old('art_content') !!}</script>
                             <script type="text/javascript">
                                  var ue = UE.getEditor('editor');
                             </script>

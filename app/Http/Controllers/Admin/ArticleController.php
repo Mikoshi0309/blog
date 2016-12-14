@@ -75,10 +75,10 @@ class ArticleController extends CommonController
                 //Redis::zadd('article_all',$re->art_id,$re->art_id);
                 return redirect('admin/article');
             }else{
-                return back()->with('errors','文章添加失败');
+                return back()->withInput()->with('errors','文章添加失败');
             }
         }else{
-            return back()->withErrors($vali);
+            return back()->withInput()->withErrors($vali);
         }
 
     }
@@ -105,6 +105,7 @@ class ArticleController extends CommonController
 
         $data = Category::getCategoryTree();
         $file = Article::with(['tags'])->find($id);
+
 //        if(Gate::denies('update-post',$file)){
 //            return back()->with('errors',"你没有权限");
 //        }
@@ -142,13 +143,23 @@ class ArticleController extends CommonController
         ];
         $vali = Validator::make($data,$rules,$mess);
         if($vali->passes()){
+            if($data['tags']){
+
+                $ids= [];
+                foreach($data['tags'] as $tagname){
+                    $tag = Tag::firstOrCreate(['name'=>$tagname]);
+                    array_push($ids,$tag->id);
+                }
+            }
+            unset($data['tags']);
             $re = Article::where('art_id',$id)->update($data);
             if($re){
-                $new_data = Article::all();
-                Redis:set('article_list',$new_data);
+                Article::find($id)->tags()->sync($ids);
+                //$new_data = Article::all();
+                //Redis:set('article_list',$new_data);
                 return redirect('admin/article');
             }else{
-                return back()->with('errors','更新成功');
+                return back()->with('errors','更新失败');
             }
         }else{
             return back()->withErrors($vali);
