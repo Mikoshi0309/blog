@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Model\Article;
+use App\Observers\TestObserver;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -34,6 +36,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        Article::observe(TestObserver::class);
     }
 }

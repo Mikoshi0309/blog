@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Mockery\Generator\Parameter;
 
 class ArticleController extends CommonController
 {
@@ -102,7 +103,6 @@ class ArticleController extends CommonController
      */
     public function edit(Request $request,$id)
     {
-
         $data = Category::getCategoryTree();
         $file = Article::with(['tags'])->find($id);
 
@@ -152,15 +152,16 @@ class ArticleController extends CommonController
                 }
             }
             unset($data['tags']);
+            //Article::findOrNew($id)->save($attributes);
             $re = Article::where('art_id',$id)->update($data);
-            if($re){
+            //if($re){
                 Article::find($id)->tags()->sync($ids);
                 //$new_data = Article::all();
                 //Redis:set('article_list',$new_data);
                 return redirect('admin/article');
-            }else{
-                return back()->with('errors','更新失败');
-            }
+           // }else{
+                //return back()->with('errors','更新失败');
+           // }
         }else{
             return back()->withErrors($vali);
         }
