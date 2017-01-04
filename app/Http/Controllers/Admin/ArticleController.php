@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+//use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Mockery\Generator\Parameter;
+use Log;
 
 class ArticleController extends CommonController
 {
@@ -24,6 +26,7 @@ class ArticleController extends CommonController
     public function index()
     {
         $data = Article::orderBy('art_id','desc')->paginate(10);
+        //Log::info('asdadsa');
         return view('admin.article.index',compact('data'));
     }
 

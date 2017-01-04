@@ -3,6 +3,7 @@
 namespace App;
 
 //use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -14,6 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $table = 'user';
     protected $fillable = [
         'name', 'email', 'password',
@@ -30,7 +32,6 @@ class User extends Authenticatable
     ];
 
     public  function test(){
-
         return  $this->table;
     }
     public function articles(){
