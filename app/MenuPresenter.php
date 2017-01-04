@@ -31,7 +31,7 @@ class MenuPresenter
         $string .= '<ul class="sub_menu">%s</ul>';
         unset($mlist['tree_title']);
         foreach($mlist as $route=>$menu){
-            $lstring .= '<li><a href="{{ url("'.$route.'") }}" target="main"><i class="'.$menu['icon'].'"></i>'.$menu['name'].'</a></li>';
+            $lstring .= '<li><a href="'.url($route).'" target="main"><i class="'.$menu['icon'].'"></i>'.$menu['name'].'</a></li>';
         }
         $string .='</li>';
         $string = sprintf($string,$lstring);
@@ -42,7 +42,7 @@ class MenuPresenter
     private function parentmenu($mlist){
         $string = '';
         foreach($mlist as $route=>$value){
-            $string .="<li><a href=\"{$route}\"><h3>{$value['name']}</a></li>";
+            $string .="<li><a href={$route}><h3>{$value['name']}</a></li>";
         }
         return $string;
     }
