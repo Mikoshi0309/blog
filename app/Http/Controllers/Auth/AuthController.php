@@ -93,7 +93,7 @@ class AuthController extends Controller
 
             return redirect()->intended('admin/');
         }else{
-            dd(123);
+            return redirect('/login');
         }
         /**********************注册直接登录****************/
 //        $this->validate($request,[
