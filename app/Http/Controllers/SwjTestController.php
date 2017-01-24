@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\Article;
+use App\User;
+use App\Jobs\SendReminderEmail;
 use App\SwjTest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -101,5 +104,11 @@ class SwjTestController extends Controller
             return $request->name;
         };
 
+    }
+    public function testqueue(Request $request){
+        //dd(gettype(Auth::user()->name));
+        $user = User::find(1);
+        $job = (new SendReminderEmail($user))->delay(60);
+        $this->dispatch($job);
     }
 }
